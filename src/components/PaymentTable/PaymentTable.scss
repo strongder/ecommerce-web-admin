@@ -1,0 +1,36 @@
+.payment-list {
+  padding: 20px;
+
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .search-input,
+    .filter-select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  }
+  .payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+  }
+
+  .payment-table th,
+  .payment-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .payment-table th {
+    background-color: #444;
+  }
+
+  .payment-table td {
+    background-color: #333;
+  }
+}

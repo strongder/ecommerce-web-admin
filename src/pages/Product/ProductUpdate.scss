@@ -1,0 +1,79 @@
+.update-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .dialog {
+    overflow-y: auto;
+    height: 80%; /* Reduce height to accommodate wider dialog */
+    border-radius: 5px;
+    width: 55%; /* Increase width to make the dialog wider */
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .dialog-content {
+      background: #444;
+      padding: 20px;
+      border-radius: 8px;
+      color: white;
+    }
+
+    .dialog-input,
+    .dialog-textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #333;
+      color: white;
+    }
+
+    .dialog-textarea {
+      resize: vertical;
+      height: 80px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .dialog-button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      margin-bottom: 15px;
+      margin-right: 10px;
+    }
+
+    .dialog-button:hover {
+      background-color: #0056b3;
+    }
+    .var-product {
+      h4 {
+        margin: 10px 0;
+        margin-bottom: 24px;
+      }
+      .var-product-group {
+      }
+
+      .attribute-group {
+        display: flex;
+        justify-content: space-between;
+        margin: px 0;
+      }
+
+      .attribute-group .dialog-input {
+        width: calc(33% - 8px);
+      }
+    }
+  }
+}

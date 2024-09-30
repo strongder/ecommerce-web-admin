@@ -1,0 +1,13 @@
+.order-view{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: var(--clr-primary);
+  padding: 20px;
+  border-radius: 8px;
+  h1{
+    padding: 10px 0 20px;
+    display: flex;
+    margin: auto;
+  }
+}

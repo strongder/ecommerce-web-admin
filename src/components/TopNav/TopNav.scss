@@ -1,0 +1,63 @@
+/* main content top */
+.main-content-top {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+
+  .sidebar-toggler {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+  }
+  .sidebar-toggler img {
+    width: 20px;
+  }
+  .content-top-title {
+    color: var(--clr-white);
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .content-top-btn {
+    margin-left: 18px;
+  }
+  .content-top-btn img {
+    width: 24px;
+  }
+  .content-top-btn img:hover {
+    filter: brightness(0) invert(1);
+  }
+  .content-top-left {
+    display: flex;
+    align-items: center;
+  }
+  .notification-btn {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+  
+    img {
+      width: 24px; // Kích thước biểu tượng chuông
+      height: 24px;
+    }
+  
+    .notification-btn-count {
+      position: absolute;
+      top: -5px; // Đặt số thông báo lên trên biểu tượng chuông
+      right: -5px; // Đặt số thông báo sang bên phải của biểu tượng
+      background-color: red; // Màu nền của số thông báo
+      color: white; // Màu chữ
+      border-radius: 50%; // Hình tròn
+      padding: 2px 6px; // Đệm cho số thông báo
+      font-size: 12px; // Kích thước chữ
+      font-weight: bold; // In đậm chữ
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 20px; // Đảm bảo có kích thước tối thiểu cho số 1
+      height: 20px;
+    }
+  }
+  
+}

@@ -1,0 +1,172 @@
+.category-view {
+  color: white;
+  background-color: var(--clr-primary);
+  padding: 20px 30px;
+  border-radius: 8px;
+
+  h1 {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    input {
+      width: 40%;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .add-category-dialog {
+    padding: 20px;
+    margin: auto;
+    width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #222;
+    color: white;
+
+    .dialog-content {
+      display: flex;
+      flex-direction: column;
+      h2 {
+        margin: auto;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #333;
+        color: white;
+      }
+
+      .dialog-buttons {
+        margin: 10px 0;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.8;
+          }
+
+          &:first-child {
+            margin-right: 10px;
+            background-color: #007bff;
+            color: white;
+
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+
+          &:last-child {
+            background-color: #ccc;
+            color: black;
+
+            &:hover {
+              background-color: #999;
+            }
+          }
+        }
+      }
+    }
+  }
+  button {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .category-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #444;
+    }
+    td {
+      background-color: #333;
+      max-width: 200px; /* Đặt chiều rộng tối đa cho ô */
+      word-wrap: break-word; /* Đảm bảo rằng từ sẽ xuống dòng khi vượt quá chiều rộng */
+      word-break: break-all; /* Đảm bảo rằng từ sẽ xuống dòng khi vượt quá chiều rộng */
+      white-space: normal;
+    }
+    input {
+      background: none;
+      background-color: transparent; /* Đảm bảo rằng nền hoàn toàn trong suốt */
+      color: white;
+      padding: 6px;
+      border: none;
+      border-radius: 4px; /* Tùy chọn: Thêm bo tròn cho viền */
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 8px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:first-child {
+        margin-right: 5px;
+        background-color: #007bff;
+        color: white;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      &:last-child {
+        background-color: #dc3545;
+        color: white;
+
+        &:hover {
+          background-color: #c82333;
+        }
+      }
+    }
+  }
+}

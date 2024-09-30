@@ -1,0 +1,66 @@
+.account-management {
+  font-family: Arial, sans-serif;
+  color: white;
+  background-color: var(--clr-primary);
+  padding: 20px 30px;
+  border-radius: 8px;
+
+  h1 {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-filter {
+    margin-bottom: 20px;
+
+    .search-input,
+    .filter-select {
+      margin-right: 10px;
+      padding: 8px;
+    }
+  }
+
+  .account-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #444;
+    }
+
+    td {
+      background-color: #333;
+    }
+  }
+
+  .action-button {
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 4px;
+
+    &.detail-button {
+      background-color: #0a7e8e;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+    &.delete-button {
+      margin-left: 10px;
+      background-color: #dc3545;
+    }
+    
+  }
+}
