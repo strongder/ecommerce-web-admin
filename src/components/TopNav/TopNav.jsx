@@ -1,6 +1,6 @@
-import { iconsImgs } from "../../utils/images";
+import { iconsImgs } from "../../data/images";
 import "./TopNav.scss";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo-ecommerce.png";
 import { SidebarContext } from "../../context/sidebarContext";
 import { Link } from "react-router-dom";
@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchNotifications } from "../../redux/slices/notificationSlice";
 import Notification from "../Notification/Notification";
 import useSocket from "../../hook/useSocket";
+import { getUnreadNotification } from "../../services/notificationService";
 
 const TopNav = () => {
   const { toggleSidebar } = useContext(SidebarContext);
   const [isNotification, setIsNotification] = useState(false);
   const dispatch = useDispatch();
+  const notifyRef = useRef(null); // Sử dụng useRef để làm chức năng đóng mở notify
   const [listNotifi, setListNotifi] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0); // State để quản lý số lượng thông báo chưa đọc
   const { notifications, loading, error } = useSelector(
@@ -25,6 +27,15 @@ const TopNav = () => {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
+  useEffect(() => {
+    const fetchUnreadNotification = async () => {
+      const unread = await getUnreadNotification();
+      console.log(unread);
+      setUnreadCount(unread);
+    };
+    fetchUnreadNotification();
+  }, []);
+
   // Update local listNotifi whenever notifications from Redux change
   useEffect(() => {
     if (notifications) {
@@ -32,8 +43,11 @@ const TopNav = () => {
     }
   }, [notifications]);
 
+  const handleReadNotifcation = () => {
+    setUnreadCount((prev) => (prev > 0 ? prev - 1 : 0));
+  };
   // Handle WebSocket notifications
-  const handleNotification = (data) => {
+  const handleFetchNotificationSocket = (data) => {
     setListNotifi((prev) => [...prev, data]); // Add new notification from WebSocket
     setUnreadCount((prev) => prev + 1); // Tăng số lượng thông báo chưa đọc
   };
@@ -41,12 +55,14 @@ const TopNav = () => {
   const connected = useSocket(
     "/topic/admin/notification",
     token,
-    handleNotification
+    handleFetchNotificationSocket
   );
 
   const handleChangeOpen = () => {
     setIsNotification(!isNotification); // Toggle notification panel
-    setUnreadCount(0); // Reset số lượng thông báo chưa đọc khi mở bảng thông báo
+    if (notifyRef.current) {
+      notifyRef.current.classList.toggle("active"); // Sử dụng useRef để đóng/mở bảng thông báo
+    }
   };
 
   return (
@@ -79,9 +95,14 @@ const TopNav = () => {
           )}
         </button>
       </div>
-
-      {/* Render notifications when WebSocket is connected and notifications panel is open */}
-      {isNotification && <Notification notifications={listNotifi} />}
+      {isNotification && (
+        <Notification
+          notifications={listNotifi}
+          onChangeOpen={handleChangeOpen}
+          onReadNotify = {handleReadNotifcation}
+          ref={notifyRef}
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductAdd.scss";
-import { categories } from '../../data/data';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllCategory } from "../../redux/slices/categorySlice";
 
 const ProductAdd = ({ onClose, onAddProduct }) => {
   const [formData, setFormData] = useState({
@@ -9,9 +10,12 @@ const ProductAdd = ({ onClose, onAddProduct }) => {
     category: "", 
     description: "",
     price: "",
+    discount: "",
     varProducts: [{ attribute: [{ key: "", value: "" }], stock: "" }],
   });
-
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.listCategory);
+  
   const handleInputChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
   };
@@ -21,6 +25,7 @@ const ProductAdd = ({ onClose, onAddProduct }) => {
     updatedArray[index] = value;
     setFormData({ ...formData, [field]: updatedArray });
   };
+  console.log(categories)
 
   const handleVarProductChange = (index, attrIndex, field, value) => {
     const updatedVarProducts = [...formData.varProducts];
@@ -56,6 +61,13 @@ const ProductAdd = ({ onClose, onAddProduct }) => {
     });
   };
 
+  useEffect(() => {
+    const newParam = {
+      pageSize: 10,
+    };
+    dispatch(fetchAllCategory(newParam));
+  }, [dispatch]);
+
   return (
     <div className="add-product">
       <div className="dialog">
@@ -70,7 +82,7 @@ const ProductAdd = ({ onClose, onAddProduct }) => {
           />
 
           <div className="image-url">
-            <h4>Hình ảnh sản phẩm</h4>
+            <h4 style = {{marginBottom: "5px"}}>Hình ảnh sản phẩm</h4>
             {formData.imageUrls.map((url, index) => (
               <input
                 key={index}
@@ -92,9 +104,9 @@ const ProductAdd = ({ onClose, onAddProduct }) => {
             className="dialog-input"
           >
             <option value="">Chọn danh mục</option>
-            {categories.map(({ id, name }) => (
-              <option key={id} value={name}>
-                {name}
+            {categories?.content && categories?.content?.map((item, index ) => (
+              <option key={index} value={item.name}>
+                {item.name}
               </option>
             ))}
           </select>
@@ -113,6 +125,15 @@ const ProductAdd = ({ onClose, onAddProduct }) => {
             onChange={handleInputChange("price")}
             className="dialog-input"
           />
+
+          <input
+            type="number"
+            placeholder="Giảm giá"
+            value={formData.discount}
+            onChange={handleInputChange("discount")}
+            className="dialog-input"
+          />
+
 
           <div className="var-product">
             <h4>Thuộc tính sản phẩm</h4>

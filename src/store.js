@@ -6,6 +6,7 @@ import orderReducer from "./redux/slices/orderSlice";
 import notificationReducer from "./redux/slices/notificationSlice";
 import categoryReducer from "./redux/slices/categorySlice";
 import paymentReducer from "./redux/slices/paymentSlice";
+import statisticSlice from "./redux/slices/statisticSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     categories: categoryReducer,
     notifications: notificationReducer,
     payments: paymentReducer,
+    statistics: statisticSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

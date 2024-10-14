@@ -1,5 +1,5 @@
 import { savings } from "../../data/data";
-import { iconsImgs, personsImgs } from "../../utils/images";
+import { iconsImgs, personsImgs } from "../../data/images";
 import "./Savings.css";
 
 const Savings = () => {

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./OrderDetail.scss";
-import { orders } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { acceptOrder, fetchOrderById } from "../../redux/slices/orderSlice";
@@ -99,9 +98,9 @@ const OrderDetail = () => {
         </table>
       </div>
       <div className="button-action">
-        <button className="btn-confirm" onClick={handleConfirm}>
+        {order?.status !=="PENDING" || order?.status !=="PENDING_PAYMENT" &&<button className="btn-confirm" onClick={handleConfirm}>
           Confirm
-        </button>
+        </button>}
         <button className="btn-exit" onClick={() => navigate(-1)}>
           Exit
         </button>

@@ -1,9 +1,9 @@
 .order-detail {
   padding: 20px;
   padding-bottom: 30px;
-  background-color: #fff;
+  background-color: #2c2c2c; /* Nền tối */
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 
   h1 {
     display: flex;
@@ -11,10 +11,14 @@
     align-items: center;
     padding: 20px;
     font-size: 28px;
-    color: #333;
+    color: #fff; /* Màu chữ sáng */
   }
-  p{
+  h2{
+    color: white;
+  }
+  p {
     margin-left: 10px;
+    color: #ccc; /* Màu chữ sáng nhẹ hơn */
   }
 
   .order-info,
@@ -26,10 +30,7 @@
   .order-status p {
     margin: 8px 15px;
     font-size: 16px;
-  }
-
-  .order-items {
-    // margin-top: 30px;
+    color: #ddd; /* Màu chữ sáng hơn */
   }
 
   .items-table {
@@ -39,13 +40,15 @@
 
   .items-table th,
   .items-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #444; /* Viền tối hơn */
     padding: 10px;
+    color: #fff;
     text-align: left;
   }
 
   .items-table th {
-    background-color: #f4f4f4;
+    background-color: #3e3e3e; /* Nền tối hơn cho tiêu đề bảng */
+    color: #fff; /* Chữ sáng */
     font-weight: 600;
   }
 
@@ -62,6 +65,7 @@
     margin-top: 20px;
     gap: 10px;
     justify-content: flex-end;
+
     button {
       padding: 10px 20px;
       border: none;
@@ -72,12 +76,12 @@
     }
 
     .btn-exit {
-      background-color: #f44336;
+      background-color: #d32f2f; /* Nút thoát màu tối */
       color: #fff;
     }
 
     .btn-confirm {
-      background-color: #4c84af;
+      background-color: #3949ab; /* Nút xác nhận màu tối */
       color: #fff;
     }
   }

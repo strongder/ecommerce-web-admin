@@ -1,0 +1,70 @@
+// src/components/RevenueStatistics.scss
+
+.revenue-statistics {
+    padding: 20px;
+    background-color: #121212; // Nền tối
+    color: #ffffff; // Màu chữ sáng
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .summary {
+        text-align: center;
+        margin-bottom: 30px;
+
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    .date-filter {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+
+        label {
+            margin: 0 10px;
+        }
+
+        input {
+            margin-left: 5px;
+            padding: 5px;
+            border: 1px solid #555; // Đường viền tối
+            border-radius: 4px;
+            background-color: #333; // Nền tối cho input
+            color: #ffffff; // Màu chữ sáng
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #6200ea; // Màu nút
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #3700b3; // Màu nút khi hover
+            }
+        }
+    }
+
+    .charts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .chart {
+            width: 45%;
+            margin-bottom: 20px;
+
+            h2 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

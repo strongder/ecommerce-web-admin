@@ -1,6 +1,6 @@
 import React from "react";
 import "./Pagination.scss";
-import { iconsImgs } from "../../utils/images";
+import { iconsImgs } from "../../data/images";
 const Pagination = ({
   currentPage,
   totalPages,

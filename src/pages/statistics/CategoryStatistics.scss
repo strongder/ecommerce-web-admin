@@ -1,0 +1,42 @@
+.container-category {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; // Căn giữa nội dung
+  padding: 20px;
+  color: black;
+
+ 
+  h2 {
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    align-self: center;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .category-statistic {
+    width: 100%; // Đảm bảo các phần chiếm toàn bộ chiều rộng
+    margin-bottom: 40px; // Thêm khoảng cách giữa các phần
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff; // Nền trắng cho các phần
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Thêm bóng cho các phần
+
+    .chart {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .recharts-wrapper {
+      margin-bottom: 20px;
+      min-width: 800px;
+      height: 400px;
+    }
+  }
+}

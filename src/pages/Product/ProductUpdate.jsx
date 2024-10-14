@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./ProductUpdate.scss";
-import { categories } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   fetchProductById,
   updateProduct,
 } from "../../redux/slices/productSlice";
+import { toast } from "react-toastify";
+import { fetchAllCategory } from "../../redux/slices/categorySlice";
 
 const ProductUpdate = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const ProductUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const product = useSelector((state) => state.products.product);
+  const categories = useSelector((state) => state.categories.listCategory);
 
   useEffect(() => {
     if (id) {
@@ -51,6 +53,7 @@ const ProductUpdate = () => {
       });
     }
   }, [product]);
+
 
   const handleInputChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
@@ -108,6 +111,12 @@ const ProductUpdate = () => {
     setFormData({ ...formData, varProducts: updatedVarProducts });
   };
 
+  useEffect(() => {
+    const newParam = {
+      pageSize: 10,
+    };
+    dispatch(fetchAllCategory(newParam));
+  }, [dispatch]);
   const handleUpdateProduct = async () => {
     if (!id) {
       console.error("Product ID is not provided for update");
@@ -134,8 +143,8 @@ const ProductUpdate = () => {
     try {
       console.log("data", data);
       await dispatch(updateProduct({ id, data })).unwrap();
-      navigate(`/products/${id}`); 
-      alert("Update successfully");
+      navigate(`/products/${id}`);
+      toast.success("Product updated successfully");
     } catch (error) {
       console.error("Update failed:", error);
     }
@@ -184,14 +193,14 @@ const ProductUpdate = () => {
           </div>
 
           <select
-            value={formData.category}
-            onChange={handleInputChange("category")}
+            value={formData.category} 
+            onChange={handleInputChange("category")} 
             className="dialog-input"
           >
-            <option value="">Select Category</option>
-            {categories.map(({ id, name }) => (
-              <option key={id} value={name}>
-                {name}
+            {/* <option value="">{}</option> */}
+            {categories?.content && categories?.content?.map((item, index ) => (
+              <option key={index} value={item.name}>
+                {item.name}
               </option>
             ))}
           </select>
@@ -259,15 +268,23 @@ const ProductUpdate = () => {
                 >
                   Add Attribute
                 </button>
-                <input
-                  type="number"
-                  placeholder="Số lượng"
-                  value={varProduct.stock}
-                  onChange={(e) =>
-                    handleVarProductChange(index, null, "stock", e.target.value)
-                  }
-                  className="dialog-input"
-                />
+                <div style={{ display: "flex", flexDirection: "row", alignItems:'center', justifyContent: 'center' }}>
+                  <p style={{fontSize: "15px", width: "80px", marginBottom: "12px"}}>Số lượng:</p>
+                  <input
+                    type="number"
+                    placeholder="Số lượng"
+                    value={varProduct.stock}
+                    onChange={(e) =>
+                      handleVarProductChange(
+                        index,
+                        null,
+                        "stock",
+                        e.target.value
+                      )
+                    }
+                    className="dialog-input"
+                  />
+                </div>
                 <button
                   onClick={() => handleRemoveVarProduct(index)}
                   className="dialog-button remove-button"

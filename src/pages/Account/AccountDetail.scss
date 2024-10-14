@@ -3,7 +3,7 @@
   background-color: var(--clr-primary);
   padding: 20px;
   border-radius: 8px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
   h1 {
     font-size: 2rem;
     display: flex;
@@ -39,14 +39,14 @@
     align-items: center;
     padding: 20px;
   }
-  .account-info {  
+  .account-info {
     .account-details {
       width: 70%;
       margin: auto;
       display: flex;
       gap: 20px;
       //justify-content: space-between;
-  
+
       .left-section {
         display: flex;
         flex-direction: column;
@@ -54,21 +54,20 @@
         padding: 30px;
         border-radius: 8px;
         box-shadow: -2px -1px 12px 5px rgb(105 98 98 / 20%);
-        
-  
+
         .avatar {
           width: 150px;
           height: 150px;
           border-radius: 50%;
           overflow: hidden;
           margin-bottom: 10px;
-  
+
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
           }
-  
+
           .avatar-placeholder {
             width: 100%;
             height: 100%;
@@ -80,25 +79,26 @@
             font-size: 14px;
           }
         }
-  
+
         .name-email {
           .field {
             display: flex;
             align-items: center;
+            justify-content: center;
             margin-bottom: 10px;
-  
+
             .label {
               font-weight: bold;
               margin-right: 10px;
             }
-  
+
             .value {
               font-size: 16px;
             }
           }
         }
       }
-  
+
       .right-section {
         flex: 1;
         display: grid;
@@ -114,19 +114,17 @@
           flex-direction: column;
           gap: 15px;
           margin-bottom: 15px;
-            
 
           .label {
             font-weight: bold;
             margin-right: 10px;
           }
-          input{
+          input {
             padding: 8px;
             border-radius: 4px;
             color: white;
             border: 1px solid #ccc;
             background: none;
-
           }
           .value {
             font-size: 16px;
@@ -135,7 +133,25 @@
       }
     }
   }
-  
+
+  .button-action {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  }
 }
 .address-table {
   width: 100%;

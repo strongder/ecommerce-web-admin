@@ -36,9 +36,26 @@ export const updateProduct = async ({ id, data }) => {
 };
 export const deleteProduct = async (productId) => {
     try {
-      const response = await api.delete(`/products/${productId}`, data);
+      const response = await api.delete(`/products/${productId}`);
       return  response.data.result;
     } catch (error) {
       console.error("get all product failed:", error.message);
     }
 };
+
+export const fetchProductTopSale = async (param) => {
+    try {
+      const response = await api.get(`/products/top-selling`, param ? { params: param } : {});  
+      return  response.data.result;
+    } catch (error) {
+      console.error("get all product failed:", error.message);
+    }
+};
+export const fetchProductStatistic = async (param) => {
+    try {
+      const response = await api.get(`/products/statistics`, param ? { params: param } : {});  
+      return  response.data.result;
+    } catch (error) {
+      console.error("get all product failed:", error.message);
+    }
+}

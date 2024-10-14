@@ -65,9 +65,8 @@ const AccountView = () => {
             <th>STT</th>
             <th>Tên</th>
             <th>Email</th>
-            <th>Vai trò</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
+            <th>Role</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -75,10 +74,13 @@ const AccountView = () => {
             listUser.content.map((account, index) => (
               <tr key={account.id}>
                 <td>{(currentPage - 1) * param.pageSize + index + 1}</td>
-                <td>{account.username}</td>
-                <td>{account.email}</td>
-                <td>{account.role}</td>
-                <td>{account.status}</td>
+                <td>{account?.username}</td>
+                <td>{account?.email}</td>
+                <td>
+                  {account.roles && account.roles.length > 0
+                    ? account.roles.map((role) => role.name).join(", ")
+                    : "N/A"}
+                </td>
                 <td>
                   <button className="action-button detail-button">
                     <Link to={`/accounts/${account.id}`}>DETAIL</Link>

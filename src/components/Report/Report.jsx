@@ -1,4 +1,4 @@
-import { iconsImgs } from "../../utils/images";
+import { iconsImgs } from "../../data/images";
 import "./Report.css";
 import { reportData } from "../../data/data";
 

@@ -32,6 +32,14 @@ export const fetchAddressByUserId = createAsyncThunk(
     return response;
   }
 );
+export const updateAvatar = createAsyncThunk(
+  "users/updateAvatar",
+  async ({avatar, id}) => {
+    const response = await userService.updateAvatar({avatar, id});
+    return response;
+  }
+);
+
 
 const initialState = {
   listUser: [],
@@ -63,7 +71,6 @@ const usersSlice = createSlice({
       .addCase(fetchAllUser.fulfilled, (state, action) => {
         state.loading = "idle";
         state.listUser = action.payload;
-        console.log(action.payload);
       })
       .addCase(fetchCurrentUser.pending, (state) => {
         state.loading = "loadaing";
@@ -78,6 +85,13 @@ const usersSlice = createSlice({
       .addCase(fetchAddressByUserId.fulfilled, (state, action) => {
         state.loading = "idle";
         state.listAddressByUser = action.payload;
+      })
+      .addCase(updateAvatar.pending, (state) => {
+        state.loading = "loading";
+      })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.loading = "idle";
+        state.currentUser.avatar = action.payload;
       });
   },
 });
