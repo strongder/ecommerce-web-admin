@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./AccountDetail.scss"; // Import CSS cho trang
-import { accountData } from "../../data/data"; // Import dữ liệu người dùng giả
-import { orders } from "../../data/data";
-import { Link, useParams } from "react-router-dom";
-import { payments } from "../../data/data";
-import PaymentList from "../../components/PaymentTable/PaymentTable";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
-import { shippingAddresses } from "../../data/data";
-import OrderList from "../../components/OrderTable/OrderTable";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAddressByUserId,
   fetchUserById,
+  updateAvatar,
 } from "../../redux/slices/userSlice";
 import OrderHistory from "../../components/OrderHistory/OrderHistory";
 import TransactionHistory from "../../components/TransactionHistory/TransactionHistory";
-import Avatar from "../../components/Avatar/Avatar";
+import { toast } from "react-toastify";
 
 const AccountDetail = () => {
   const [activeTab, setActiveTab] = useState("basicInfo");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
     dispatch(fetchUserById(id));
@@ -76,58 +72,88 @@ const AccountDetail = () => {
         </button>
       </div>
       <div className="tab-content">{renderContent()}</div>
+      <div className="button-action">
+        <button className="btn-exit" onClick={() => navigate(-1)}>
+          Exit
+        </button>
+      </div>
     </div>
   );
 };
 
 const BasicInfo = () => {
   const account = useSelector((state) => state.users.user);
-  const [active, setActive] = useState(false);
+  const dispatch = useDispatch();
+  const [avatarObj, setAvatarObj] = useState({ avatar: "" });
+  const { id } = useParams();
+  const fileInputRef = useRef(null);
+  useEffect(() => {
+    if (account) {
+      setAvatarObj({ ...avatarObj, avatar: account?.avatar });
+    }
+  }, [account]);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAvatarObj({ ...avatarObj, avatar: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleUpdateAvatar = () => {
+    dispatch(updateAvatar({ avatar: avatarObj, id }));
+    toast.success("Update avatar successfully");
+  };
+  
   return (
     <div className="account-info">
       <h2>Thông Tin Tài Khoản</h2>
       {account && (
         <div className="account-details">
           <div className="left-section">
-            <div className="avatar">
-              {account.avatar ? (
-                <img src={account.avatar} alt="Avatar" />
-              ) : (
-                <Avatar fullName={account?.fullName || account.email} />
-              )}
+            <div className="avatar" onClick = {() => fileInputRef.current.click()}>
+              <input type="file" onChange={handleFileChange} ref = {fileInputRef} style={{display: "none"}} />
+              {avatarObj && <img src={avatarObj.avatar} alt="Avatar" />}
             </div>
             <div className="name-email">
               <div className="field">
-                <span className="value">{account.fullName || "N/A"}</span>
+                <span className="value">{account?.username || "N/A"}</span>
               </div>
               <div className="field">
-                <span className="value">{account.email}</span>
+                <span className="value">{account?.email}</span>
               </div>
+            </div>
+            <div className="button-action">
+              <button className="btn-update" onClick={handleUpdateAvatar}>
+                Update
+              </button>
             </div>
           </div>
           <div className="right-section">
             <div className="field">
               <span className="label">Username</span>
-              <input value={account.username} />
+              <input value={account?.username} />
             </div>
             <div className="field">
               <span className="label">Email:</span>
-              <input type="text" value={account.email} />
+              <input type="text" value={account?.email} />
             </div>
             <div className="field">
               <span className="label">FullName:</span>
-              <input type="text" value={account.fullName} />
+              <input type="text" value={account?.fullName} />
             </div>
             <div className="field">
               <span className="label">Phone:</span>
-              <input type="text" value={account.phone} />
+              <input type="text" value={account?.phone} />
             </div>
             <div className="field">
               <span className="label">Roles:</span>
               <input
                 value={
-                  account.roles && account.roles.length > 0
-                    ? account.roles.map((role) => role.name).join(", ")
+                  account?.roles && account.roles.length > 0
+                    ? account?.roles?.map((role) => role.name).join(", ")
                     : "N/A"
                 }
               />

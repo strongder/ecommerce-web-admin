@@ -77,32 +77,32 @@ const ProductView = () => {
             <th>STT</th>
             <th>Image</th>
             <th>Name</th>
-            <th>Ngày thêm</th>
-            <th>Số lượng</th>
-            <th>Hành động</th>
+            <th>Create At</th>
+            <th>Quantity</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {listProduct?.content &&
-            listProduct.content.map((product, index) => (
-              <tr key={product.id}>
+            listProduct?.content?.map((product, index) => (
+              <tr key={product?.id}>
                 <td>{index + 1 + (currentPage - 1) * param.pageSize}</td>
                 <td>
                   <img
-                    src={product.imageUrls?.[0] || "placeholder.jpg"}
-                    alt={product.name}
+                    src={product?.imageUrls[0].imageUrl || "placeholder.jpg"}
+                    alt={product?.name}
                     className="product-image"
                   />
                 </td>
-                <td>{product.name}</td>
-                <td>{new Date(product.createdAt).toLocaleDateString()}</td>
-                <td>{product.stock}</td>
+                <td>{product?.name}</td>
+                <td>{new Date(product?.createdAt)?.toLocaleDateString()}</td>
+                <td>{product?.stock}</td>
                 <td>
                   <button className="action-button detail">
-                    <Link to={`/products/${product.id}`}>Detail</Link>
+                    <Link to={`/products/${product?.id}`}>Detail</Link>
                   </button>
                   <button className="action-button edit">
-                    <Link to={`/products/update/${product.id}`}>Edit</Link>
+                    <Link to={`/products/update/${product?.id}`}>Edit</Link>
                   </button>
                   <button className="action-button delete">Delete</button>
                 </td>

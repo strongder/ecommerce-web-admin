@@ -1,0 +1,50 @@
+$primary-color: #4caf50; // Màu chính cho các tab
+$active-color: #388e3c; // Màu cho tab đang hoạt động
+$tab-background: #4c4c4c; // Nền cho tab
+$tab-active-background: #e0e0e0; // Nền cho tab đang hoạt động
+$font-color: #ffffff; // Màu chữ chính
+
+.statistics-container {
+  padding: 20px;
+  background-color: var(--clr-primary); // Nền trắng cho container
+  color: white; // Màu chữ trắng
+
+  h1 {
+    font-size: 24px;
+    color: $font-color;
+    margin-bottom: 20px;
+  }
+
+  .tabs {
+    display: flex; // Sử dụng flexbox để sắp xếp các tab
+    padding: 0 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+
+    .tab {
+      flex: 1; // Chiều rộng của mỗi tab bằng nhau
+      padding: 10px 15px;
+      font-family: var(--font-family-bai);
+      border: none;
+      border-radius: 5px;
+      color: $font-color;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center; // Căn giữa chữ trong tab
+      transition: background-color 0.3s, color 0.3s; // Hiệu ứng chuyển màu
+
+      &.active {
+        background-color: $tab-active-background; // Nền cho tab đang hoạt động
+        color: $primary-color; // Màu chữ cho tab hoạt động
+        font-weight: bold; // Chữ đậm cho tab đang hoạt động
+      }
+
+      &:hover {
+        background-color: lighten($tab-active-background, 10%); // Hiệu ứng hover
+        color: $primary-color; // Thay đổi màu chữ khi hover
+      }
+    }
+  }
+}
+

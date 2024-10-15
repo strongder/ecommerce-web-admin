@@ -37,7 +37,7 @@ export const shipOrder = async (orderId) => {
 
 export const fetchOrderByUserId = async (id, param) => {
     try {
-        const response = await api.get(`/orders/user/${id}`, param ? { params: param } : {});
+        const response = await api.get(`/orders/user/${id}`, null ,param ? { params: param } : {});
         return  response.data.result;
     } catch (error) {
         console.error("Failed to fetch order", error.message);

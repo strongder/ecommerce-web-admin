@@ -36,3 +36,12 @@ export const fetchAddressByUserId = async (userId) => {
         console.error('Failed to fetch user', error.message);
     }
 }
+export const updateAvatar = async ({avatar, id}) => {
+    try {
+        console.log("check")
+        const response = await api.put(`/users/${id}/update-avatar`, avatar);
+        return response.data.result;
+    } catch (error) {
+        console.error('Failed to fetch user', error.message);
+    }
+}

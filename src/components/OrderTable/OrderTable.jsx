@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination/Pagination"; // Import component Pagination
 import "./OrderTable.scss"; // Import CSS cho component
-import { iconsImgs } from "../../utils/images";
+import { iconsImgs } from "../../data/images";
 const OrderTable = ({
   orders,
   currentPage,
@@ -29,7 +29,7 @@ const OrderTable = ({
         <thead>
           <tr>
             <th>STT</th>
-            <th>Tên</th>
+            <th>RecipientName</th>
             <th>Phone</th>
             <th>Total</th>
             <th>PaymentMethod</th>
@@ -47,7 +47,7 @@ const OrderTable = ({
               <td>{order?.total}</td>
               <td>{order?.paymentMethod}</td>
               <td>{order?.status}</td>
-              <td>{order?.createAt}</td>
+              <td>{new Date(order?.createAt).toLocaleDateString()}</td>
               <td>
                 <button className="action-button detail-button">
                   <Link to={`/orders/${order.id}`}>DETAIL</Link>

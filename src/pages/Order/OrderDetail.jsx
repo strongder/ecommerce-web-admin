@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./OrderDetail.scss";
-import { orders } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { acceptOrder, fetchOrderById } from "../../redux/slices/orderSlice";

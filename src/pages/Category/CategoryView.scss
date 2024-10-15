@@ -60,12 +60,22 @@
       input {
         width: 100%;
         padding: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         border: 1px solid #ccc;
         border-radius: 4px;
         background-color: #333;
         color: white;
       }
+      label{
+        margin-bottom: 10px;
+        cursor: pointer;
+
+        &:hover{
+
+          opacity: 0.6;
+        }
+      }
+      
 
       .dialog-buttons {
         margin: 10px 0;
@@ -103,7 +113,16 @@
         }
       }
     }
+    input[type="file"] {
+      display: none;
+    }
+    select{
+      padding: 10px;
+      margin-bottom: 20px;
+    }
   }
+
+
   button {
     font-size: 15px;
     font-weight: 600;

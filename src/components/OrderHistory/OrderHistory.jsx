@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import OrderTable from "../OrderTable/OrderTable";
 import { fetchOrderByUserId } from "../../redux/slices/orderSlice";
 
 const OrderHistory = () => {
-    
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
     const listOrder = useSelector((state) => state.orders.listOrderByUser);
@@ -20,6 +20,7 @@ const OrderHistory = () => {
         ...param,
         pageNum: currentPage - 1,
       };
+      console.log(id)
       dispatch(fetchOrderByUserId(id, newParam));
     }, [dispatch, currentPage]);
     const handleSearchChange = (e) => {
@@ -42,8 +43,8 @@ const OrderHistory = () => {
     return (
       <div className="order-history">
         <h2>Lịch Sử Mua Hàng</h2>
-        {listOrder?.content && 
-        <OrderList
+        {listOrder?.content && (
+        <OrderTable
           orders={listOrder.content}
           currentPage={currentPage}
           itemsPerPage={param.pageSize}
@@ -51,11 +52,9 @@ const OrderHistory = () => {
           handlePrevPage={handlePrevPage}
           handleNextPage={handleNextPage}
           totalPages={totalPages}
-          // searchTerm={searchTerm}
-          // selectedStatus={selectedStatus}
           handleSearchChange={handleSearchChange}
-          handleStatusChange={handleStatusChange}
-        />}
+        />
+      )}
       </div>
     );
 };

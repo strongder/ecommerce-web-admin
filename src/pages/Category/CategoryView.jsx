@@ -2,25 +2,47 @@ import React, { useState, useRef, useEffect } from "react";
 import "./CategoryView.scss";
 import Pagination from "../../components/Pagination/Pagination";
 import {
-  addCategory,
   fetchAllCategory,
+  fetchParentCategory,
+  updateCategory,
+  addCategory,
+  deleteCategory,
 } from "../../redux/slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Thêm useNavigate để điều hướng
+import { toast } from "react-toastify";
 
 const CategoryView = () => {
-  const [newCategory, setNewCategory] = useState({ name: "", image: "" });
-  const [editingCategory, setEditingCategory] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
+  const [newCategory, setNewCategory] = useState({
+    name: "",
+    image: "",
+    parentId: "",
+  });
+  const [editCategory, setEditCategory] = useState({
+    id: "",
+    name: "",
+    image: "",
+    parentId: "",
+  });
   const addDialogRef = useRef(null);
+  const updateDialogRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
-  const { listCategory, loading } = useSelector((state) => state.categories);
+  const navigate = useNavigate(); // Khai báo useNavigate
+  const { listCategory, loading, parentCategories } = useSelector(
+    (state) => state.categories
+  );
+  const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
   const param = {
     pageNum: currentPage,
     pageSize: 10,
     sortDir: null,
     sortBy: null,
   };
+
+  useEffect(() => {
+    dispatch(fetchParentCategory());
+  }, [dispatch]);
 
   useEffect(() => {
     const newParam = {
@@ -33,7 +55,9 @@ const CategoryView = () => {
   const handleAddCategory = async () => {
     try {
       await dispatch(addCategory(newCategory)).unwrap();
-      const totalPages = Math.ceil((listCategory.totalElements + 1) / param.pageSize);
+      const totalPages = Math.ceil(
+        (listCategory.totalElements + 1) / param.pageSize
+      );
       setCurrentPage(totalPages);
       setNewCategory({ name: "", image: "" });
       addDialogRef.current.close(); // Đóng dialog thêm danh mục
@@ -42,30 +66,38 @@ const CategoryView = () => {
     }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e, setData) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setNewCategory((prev) => ({ ...prev, image: reader.result }));
+      setData((prev) => ({ ...prev, image: reader.result }));
     };
     if (file) {
       reader.readAsDataURL(file); // Chuyển đổi file hình thành Base64
     }
   };
 
-  const handleDeleteCategory = (id) => {};
-
-  const handleEditCategory = (category) => {
-    setEditingCategory(category);
+  const handleDeleteCategory = async (id) => {
+    await dispatch(deleteCategory(id)).unwrap();
+    toast.success("Xóa danh mục thành công");
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditingCategory((prev) => ({ ...prev, [name]: value }));
+  const handleOpendialogUpdate = (category) => {
+    setEditCategory({
+      id: category.id,
+      name: category.name,
+      image: category.image,
+      parentId: category.parentId,
+    });
+    updateDialogRef.current.showModal();
   };
 
-  const handleUpdateCategory = () => {
-    // Update category logic here
+  const handleUpdateCategory = async () => {
+    const categoryId = editCategory.id;
+    delete editCategory.id;
+    await dispatch(updateCategory({ categoryId, data: editCategory })).unwrap();
+    updateDialogRef.current.close(); // Đóng dialog update danh mục
+    toast.success("Cập nhật danh mục thành công");
   };
 
   const handlePageChange = (pageNumber) => {
@@ -82,7 +114,7 @@ const CategoryView = () => {
 
   const totalPages = listCategory?.totalPages || 1;
 
-  if (loading === "idel") {
+  if (loading === "idle") {
     return <div>Loading...</div>;
   }
 
@@ -90,14 +122,8 @@ const CategoryView = () => {
     <div className="category-view">
       <h1>Quản Lý Danh Mục</h1>
       <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Tìm kiếm danh mục..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
         <button onClick={() => addDialogRef.current.showModal()}>
-          Thêm Danh Mục
+          Add Category
         </button>
       </div>
       <dialog ref={addDialogRef} className="add-category-dialog">
@@ -112,16 +138,34 @@ const CategoryView = () => {
             }
             placeholder="Tên danh mục"
           />
+
+          <select
+            name="parentId"
+            value={newCategory.parentId}
+            onChange={(e) =>
+              setNewCategory({ ...newCategory, parentId: e.target.value })
+            }
+          >
+            <option value="">Chọn danh mục cha</option>
+            {parentCategories &&
+              parentCategories.map((category, index) => (
+                <option key={index} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+          </select>
+          <label htmlFor="inputNewImage">Chọn ảnh</label>
           <input
+            id="inputNewImage"
             type="file"
             accept="image/*"
-            onChange={handleImageChange} // Hàm để xử lý sự kiện chọn ảnh
+            onChange={(e) => handleImageChange(e, setNewCategory)}
           />
           {newCategory.image && (
             <img
               src={newCategory.image}
               alt="Preview"
-              style={{ width: "100px", height: "100px" }} // Hiển thị ảnh xem trước
+              style={{ width: "100px", height: "100px" }}
             />
           )}
           <div className="dialog-buttons">
@@ -141,8 +185,8 @@ const CategoryView = () => {
           </tr>
         </thead>
         <tbody>
-          {listCategory.content &&
-            listCategory.content.map((category, index) => (
+          {listCategory?.content &&
+            listCategory?.content?.map((category, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{category?.name}</td>
@@ -151,13 +195,13 @@ const CategoryView = () => {
                     <img
                       src={category.image}
                       alt="Category"
-                      style={{ width: "50px", height: "50px" }} // Hiển thị ảnh danh mục
+                      style={{ width: "50px", height: "50px" }}
                     />
                   )}
                 </td>
-                <td>{category?.createAt}</td>
+                <td>{new Date(category?.createAt).toLocaleDateString()}</td>
                 <td>
-                  <button onClick={() => handleEditCategory(category)}>
+                  <button onClick={() => handleOpendialogUpdate(category)}>
                     Edit
                   </button>
                   <button onClick={() => handleDeleteCategory(category.id)}>
@@ -175,6 +219,64 @@ const CategoryView = () => {
         handlePageChange={handlePageChange}
         handleNextPage={handleNextPage}
       />
+      {
+        <dialog ref={updateDialogRef} className="add-category-dialog">
+          <div className="dialog-content">
+            <h2>Update category</h2>
+            <input
+              type="text"
+              name="name"
+              value={editCategory.name}
+              onChange={(e) =>
+                setEditCategory({
+                  ...editCategory,
+                  name: e.target.value,
+                })
+              }
+              placeholder="Tên danh mục"
+            />
+
+            <select
+              name="parentId"
+              value={editCategory.parentId}
+              onChange={(e) =>
+                setEditCategory({
+                  ...editCategory,
+                  parentId: e.target.value,
+                })
+              }
+            >
+              {parentCategories &&
+                parentCategories.map((category, index) => (
+                  <option key={index} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+            </select>
+
+            <label htmlFor="inputImage">Chọn ảnh</label>
+            <input
+              id="inputImage"
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageChange(e, setEditCategory)}
+            />
+            {editCategory.image && (
+              <img
+                src={editCategory.image}
+                alt="Preview"
+                style={{ width: "100px", height: "100px" }}
+              />
+            )}
+            <div className="dialog-buttons">
+              <button onClick={handleUpdateCategory}>Update</button>
+              <button onClick={() => updateDialogRef.current.close()}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </dialog>
+      }
     </div>
   );
 };

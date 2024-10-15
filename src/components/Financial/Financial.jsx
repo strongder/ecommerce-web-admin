@@ -1,4 +1,4 @@
-import { iconsImgs } from "../../utils/images"
+import { iconsImgs } from "../../data/images"
 
 const Financial = () => {
   return (

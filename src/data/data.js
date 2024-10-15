@@ -1,5 +1,5 @@
-import { iconsImgs } from "../utils/images";
-import { personsImgs } from "../utils/images";
+import { iconsImgs } from "./images";
+import { personsImgs } from "./images";
 export const navigationLinks = [
   { id: 1, to: "/", title: "Home", image: iconsImgs.home },
   { id: 2, to: "/categories", title: "Category", image: iconsImgs.category },
@@ -7,8 +7,7 @@ export const navigationLinks = [
   { id: 4, to: "/orders", title: "Order", image: iconsImgs.order },
   { id: 5, to: "/accounts", title: "Account", image: iconsImgs.user },
   { id: 6, to: "/payments", title: "Payment", image: iconsImgs.wallet },
-  { id: 8, to: "/reports", title: "Reports", image: iconsImgs.report },
-  { id: 10, to: "/products", title: "Settings", image: iconsImgs.gears },
+  { id: 8, to: "/statistics", title: "Statistic", image: iconsImgs.report },
 ];
 
 export const categories = [
@@ -137,287 +136,32 @@ export const savings = [
     amount_left: 40000,
   },
 ];
+// src/data/mockData.js
 
-export const productData = {
-  code: 1000,
-  message: "Create product success",
-  result: {
-    id: 3,
-    name: "T-Shirt 02",
-    stock: "250",
-    rating: 0.0,
-    imageUrls: [
-      { imageUrl: "http://example.com/images/tshirt4.jpg" },
-      { imageUrl: "http://example.com/images/tshirt6.jpg" },
-    ],
-    description: "A comfortable cotton T-shirt",
-    price: 100000.0,
-    varProducts: [
-      { id: 5, attribute: { size: "M", color: "blue" }, stock: 100 },
-      { id: 6, attribute: { size: "L", color: "blue" }, stock: 150 },
-    ],
-    createdAt: "2024-08-27T18:06:07.4142629",
-    delete: false,
-  },
+// src/data/mockData.js
+export const mockOrderData = {
+  totalOrders: 100, // Tổng số đơn hàng
+  successfulOrders: 80, // Số lượng đơn hàng thành công
+  canceledOrders: 20, // Số lượng đơn hàng bị hủy
 };
-
-export const accountData = [
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-  {
-    id: 1,
-    username: "admin",
-    password: "$2a$10$.SOCH/UmXfOIsQ.P.XGyIOJElsTRB.eaz1AMe.i1Sp7Ov3n21MJ9S",
-    avatar: null,
-    fullName: null,
-    email: "admin",
-    phone: null,
-    roles: [
-      {
-        name: "ADMIN",
-      },
-    ],
-  },
-];
-
-export const orders = [
-  {
-    recipientName: "nguyen van a",
-    phone: "01234567",
-    paymentMethod: "VNPAY",
-    status: "PENDING PAYMENT",
-    total: 200040.0,
-    createdAt: "2024-08-29T16:43:33.967125",
-    address: {
-      id: 1,
-      city: "ha noi",
-      district: "thanh tri",
-      ward: "tan trieu",
-      addressDetail: "44B, 83 tan trieu",
-    },
-    orderItems: [
-      {
-        id: 6,
-        quantity: 2,
-        price: 100000.0,
-        name: "T-Shirt 02",
-        image:
-          "https://blog.totoday.vn/wp-content/uploads/2022/10/7-cach-phoi-do-voi-ao-thun-form-rong-nam-chat-phat-ngat-4.jpg",
-        varProduct: {
-          id: 3,
-          attribute: {
-            size: "M",
-            color: "blue",
-          },
-          stock: 92,
-        },
-      },
-      {
-        id: 7,
-        quantity: 2,
-        price: 20.0,
-        name: "T-Shirt 01",
-        image:
-          "https://blog.totoday.vn/wp-content/uploads/2022/10/7-cach-phoi-do-voi-ao-thun-form-rong-nam-chat-phat-ngat-4.jpg",
-        varProduct: {
-          id: 1,
-          attribute: {
-            size: "M",
-            color: "blue",
-          },
-          stock: 96,
-        },
-      },
-    ],
-  },
-];
-
-export const payments = [
-  {
-    transactionId: "50679024",
-    orderId: null,
-    amount: 13000.0,
-    paymentMethod: "VNPay",
-    status: "pending",
-    paymentTime: "2024-08-26T01:31:24.788089",
-  },
-  {
-    transactionId: "38647699",
-    orderId: 2,
-    amount: 40.0,
-    paymentMethod: "VNPAY",
-    status: "PENDING",
-    paymentTime: "2024-08-26T10:42:54.38398",
-  },
-  {
-    transactionId: "02068379",
-    orderId: 3,
-    amount: 200000.0,
-    paymentMethod: "VNPAY",
-    status: "success",
-    paymentTime: "2024-08-26T10:47:46.239562",
-  },
-  {
-    transactionId: "88432414",
-    orderId: 4,
-    amount: 200000.0,
-    paymentMethod: "VNPAY",
-    status: "success",
-    paymentTime: "2024-08-26T10:53:10.418115",
-  },
-];
-
-export const shippingAddresses = [
-  {
-    id: 1,
-    city: "ha noi",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 2,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 2,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 2,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 2,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 1,
-    city: "ha noi",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 2,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 3,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 4,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-  {
-    id: 5,
-    city: "thanh hoa",
-    district: "thanh tri",
-    ward: "tan trieu",
-    addressDetail: "44B, 83 tan trieu",
-  },
-];
+export const mockRevenueData = {
+  total: 10000000, // Tổng doanh thu
+  revenueByTime: [
+      { _id: '2023-01-01', total: 1000000 },
+      { _id: '2023-01-02', total: 1200000 },
+      { _id: '2023-01-03', total: 800000 },
+      { _id: '2023-01-04', total: 1500000 },
+      { _id: '2023-01-05', total: 900000 },
+  ],
+  revenueByCategory: [
+      { _id: 'Danh mục A', total: 4000000 },
+      { _id: 'Danh mục B', total: 3000000 },
+      { _id: 'Danh mục C', total: 2000000 },
+      { _id: 'Danh mục D', total: 1000000 },
+  ],
+  revenueByPaymentMethod: [
+      { _id: 'Thẻ tín dụng', total: 5000000 },
+      { _id: 'Ví điện tử', total: 3000000 },
+      { _id: 'Tiền mặt', total: 2000000 },
+  ],
+};
