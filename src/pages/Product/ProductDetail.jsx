@@ -38,16 +38,23 @@ const ProductDetail = () => {
               </p>
               <p>
                 <strong>Price:</strong>{" "}
-                {product.price && product.price.toLocaleString()} VND
+                {product.price && product?.price.toLocaleString()} VND
               </p>
               <p>
-                <strong>Stock:</strong> {product.stock}
+                <strong>Stock:</strong> {product?.stock}
               </p>
               <p>
-                <strong>Rating:</strong> {product.rating}
+                <strong>Quantity Sold:</strong> {product?.quantitySold}
+              </p>
+
+              <p>
+                <strong>Rating:</strong> {product?.rating}
               </p>
               <p>
-                <strong>Description:</strong> {product.description}
+                <strong>Description:</strong> {product?.description}
+              </p>
+              <p>
+                <strong>Discount:</strong> {product?.dispatch}
               </p>
               <p>
                 <strong>CreateAt:</strong>{" "}

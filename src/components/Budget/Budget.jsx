@@ -1,5 +1,5 @@
 import "./Budget.css";
-import { iconsImgs } from "../../utils/images";
+import { iconsImgs } from "../../data/images";
 import { budget } from "../../data/data";
 
 const Budget = () => {

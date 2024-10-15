@@ -1,6 +1,6 @@
 import "./Transactions.css";
 import { transactions } from "../../data/data";
-import { iconsImgs } from "../../utils/images";
+import { iconsImgs } from "../../data/images";
 
 const Transactions = () => {
   return (

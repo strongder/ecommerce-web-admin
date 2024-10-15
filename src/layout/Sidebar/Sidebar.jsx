@@ -1,17 +1,22 @@
 import { useEffect, useState, useContext } from "react";
-import { iconsImgs, personsImgs } from "../../utils/images";
+import { iconsImgs, personsImgs } from "../../data/images";
 import { navigationLinks } from "../../data/data";
 import "./Sidebar.css";
 import { logout } from "../../redux/slices/authSlice";
 import { SidebarContext } from "../../context/sidebarContext";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentUser } from "../../redux/slices/userSlice";
 
 const Sidebar = () => {
   const [activeLinkIdx, setActiveLinkIdx] = useState(1);
   const [sidebarClass, setSidebarClass] = useState("");
   const { isSidebarOpen } = useContext(SidebarContext);
+  const currentUser = useSelector((state) => state.users.currentUser);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
   useEffect(() => {
     if (isSidebarOpen) {
       setSidebarClass("sidebar-change");
@@ -25,13 +30,14 @@ const Sidebar = () => {
   };
   return (
     <div className={`sidebar ${sidebarClass}`}>
-      <div className="user-info">
-        <div className="info-img img-fit-cover">
-          <img src={personsImgs.person_two} alt="profile" />
+      {currentUser && (
+        <div className="user-info">
+          <div className="info-img img-fit-cover">
+            <img src={currentUser?.avatar} alt="profile" />
+          </div>
+          <span className="info-name">{currentUser?.username}</span>
         </div>
-        <span className="info-name">alice-doe</span>
-      </div>
-
+      )}
       <nav className="navigation">
         <ul className="nav-list">
           {navigationLinks.map((navigationLink) => (

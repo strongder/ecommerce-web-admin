@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as productService from "../../services/productService";
+import api from "../../api";
 
 // Định nghĩa các async thunks
 export const fetchProductById = createAsyncThunk(
@@ -27,7 +28,7 @@ export const addProduct = createAsyncThunk(
 );
 
 export const updateProduct = createAsyncThunk(
-  'products/update',
+  "products/update",
   async ({ id, data }, { rejectWithValue }) => {
     try {
       console.log("data", data);
@@ -46,12 +47,52 @@ export const deleteProduct = createAsyncThunk(
     return response;
   }
 );
+export const fetchProductTopSale = createAsyncThunk(
+  "product/fetchProductTopSale",
+  async (param) => {
+    const response = await productService.fetchProductTopSale(param);
+    return response;
+  }
+);
 
+export const fetchProductStatistic = createAsyncThunk(
+  "product/fetchProductSatistic",
+  async (param) => {
+    const response = await productService.fetchProductStatistic(param);
+    return response;
+  }
+);
+
+export const getProductSold = createAsyncThunk(
+  "product/getProductSold",
+  async () => {
+    try {
+      const response = await api.get(`/products/total-sold`);
+      return response.data.result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+export const getProductInStock = createAsyncThunk(
+  "product/getProductInStock",
+  async () => {
+    try {
+      const response = await api.get(`/products/total-in-stock`);
+      return response.data.result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 // Khởi tạo state
 const initialState = {
   product: {},
   listProduct: [],
-  totalPage: 0,
+  listProductTopSale: [],
+  listProductStatistic: [],
+  totalSold: 0,
+  totalStock: 0,
   loading: "idle",
   error: null,
 };
@@ -103,7 +144,6 @@ const productSlice = createSlice({
         state.loading = false;
         state.product = action.payload;
       })
-
       .addCase(updateProduct.rejected, (state, action) => {
         state.loading = "idle";
         state.error = action.error.message;
@@ -120,6 +160,19 @@ const productSlice = createSlice({
       .addCase(deleteProduct.rejected, (state, action) => {
         state.loading = "idle";
         state.error = action.error.message;
+      })
+      .addCase(fetchProductStatistic.fulfilled, (state, action) => {
+        state.loading = "successed";
+        state.listProductStatistic = action.payload;
+      })
+      .addCase(fetchProductTopSale.fulfilled, (state, action) => {
+        state.listProductTopSale = action.payload;
+      })
+      .addCase(getProductSold.fulfilled, (state, action) => {
+        state.totalSold = action.payload;
+      })
+      .addCase(getProductInStock.fulfilled, (state, action) => {
+        state.totalStock = action.payload;
       });
   },
 });

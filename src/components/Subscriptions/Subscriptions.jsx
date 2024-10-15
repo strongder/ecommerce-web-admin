@@ -1,5 +1,5 @@
 import { subscriptions } from "../../data/data"
-import { iconsImgs } from "../../utils/images"
+import { iconsImgs } from "../../data/images"
 import "./Subscriptions.css";
 
 const Subscriptions = () => {

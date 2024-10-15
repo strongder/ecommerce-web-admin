@@ -8,6 +8,7 @@ import CategoryView from "../pages/Category/CategoryView";
 import OrderView from "../pages/Order/OrderView";
 import OrderDetail from "../pages/Order/OrderDetail";
 import PaymentView from "../pages/Payment/PaymentView";
+import Statistics from "../pages/statistics/Statistics";
 
 
 const privateRoutes = [
@@ -21,6 +22,7 @@ const privateRoutes = [
     {path: '/orders', page: OrderView},
     {path: '/orders/:id', page: OrderDetail},
     {path: '/payments', page: PaymentView},
+    {path: '/statistics', page: Statistics},
     
 
 ]
