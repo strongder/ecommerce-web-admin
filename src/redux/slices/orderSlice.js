@@ -17,9 +17,16 @@ export const fetchAllOrder = createAsyncThunk(
   }
 );
 export const acceptOrder = createAsyncThunk(
-  "order/acceptOrder",
+  "order/actceptOrder",
   async (orderId) => {
     const response = await orderService.acceptOrder(orderId);
+    return response;
+  }
+);
+export const shipOrder = createAsyncThunk(
+  "order/shipOrder",
+  async (orderId) => {
+    const response = await orderService.shipOrder(orderId);
     return response;
   }
 );
@@ -65,8 +72,15 @@ const orderSlice = createSlice({
     }).addCase(fetchOrderByUserId.fulfilled, (state, action) => {
         state.loading = "successed";
         state.listOrderByUser = action.payload;
-    });
-    }
+    })
+    .addCase(shipOrder.pending, (state) => {
+        state.loading = "loading";
+    }).addCase(shipOrder.fulfilled, (state, action) => {
+        state.loading = "successed";
+        state.order = action.payload;
+    })
+    ;
+  }
 });
 
 export default orderSlice.reducer; 

@@ -18,7 +18,12 @@ const OrderDetail = () => {
     }
   }, [dispatch, id]);
 
-  const handleConfirm = () => {
+  const handleProcessing = () => {
+    dispatch(acceptOrder(id));
+    toast.success("Xác nhận đơn hàng thành công");
+  };
+
+  const handleShiped = () => {
     dispatch(acceptOrder(id));
     toast.success("Xác nhận đơn hàng thành công");
   };
@@ -58,7 +63,7 @@ const OrderDetail = () => {
       </div>
 
       <div className="order-items">
-        <h2 style={{marginBottom:"10px"}}>Sản Phẩm Trong Đơn Hàng</h2>
+        <h2 style={{ marginBottom: "10px" }}>Sản Phẩm Trong Đơn Hàng</h2>
         <table className="items-table">
           <thead>
             <tr>
@@ -99,11 +104,18 @@ const OrderDetail = () => {
         </table>
       </div>
       <div className="button-action">
-        <button className="btn-confirm" onClick={handleConfirm}>
-          Confirm
-        </button>
+        {order?.status === "PENDING" && (
+          <button className="btn-confirm" onClick={handleProcessing}>
+            PROCESSING
+          </button>
+        )}
+        {order?.status === "PROCESSING" && (
+          <button className="btn-confirm" onClick={handleShiped}>
+            SHIPED
+          </button>
+        )}
         <button className="btn-exit" onClick={() => navigate(-1)}>
-          Exit
+          EXIT
         </button>
       </div>
     </div>

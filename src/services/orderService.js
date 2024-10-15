@@ -26,6 +26,14 @@ export const acceptOrder = async (orderId) => {
     console.error("Failed to accept order", error);
   }
 };
+export const shipOrder = async (orderId) => {
+  try {
+    const response = await api.put(`/orders/ship-order/${orderId}`);
+    return response.data.result;
+  } catch (error) {
+    console.error("Failed to accept order", error);
+  }
+};
 
 export const fetchOrderByUserId = async (id, param) => {
     try {
