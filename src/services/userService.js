@@ -45,3 +45,13 @@ export const updateAvatar = async ({avatar, id}) => {
         console.error('Failed to fetch user', error.message);
     }
 }
+
+export const addAccount = async (data) => {
+    try {
+        console.log("check")
+        const response = await api.post(`/users/register`, data);
+        return response.data.result;
+    } catch (error) {
+        console.error('Failed to fetch user', error.message);
+    }
+}

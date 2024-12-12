@@ -22,7 +22,7 @@ const OrderHistory = () => {
       };
       console.log(id)
       dispatch(fetchOrderByUserId(id, newParam));
-    }, [dispatch, currentPage]);
+    }, [dispatch, currentPage, id]);
     const handleSearchChange = (e) => {
       setSearchTerm(e.target.value);
     };

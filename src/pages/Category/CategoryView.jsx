@@ -123,7 +123,7 @@ const CategoryView = () => {
       <h1>Quản Lý Danh Mục</h1>
       <div className="search-bar">
         <button onClick={() => addDialogRef.current.showModal()}>
-          Add Category
+          Thêm danh mục
         </button>
       </div>
       <dialog ref={addDialogRef} className="add-category-dialog">

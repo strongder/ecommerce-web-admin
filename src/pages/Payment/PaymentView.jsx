@@ -45,7 +45,7 @@ const PaymentView = () => {
 
   return (
     <div className="payment-view">
-      <h1>Payment Management</h1>
+      <h1>Quản lý thanh toán</h1>
       {listPayment?.content &&
       <PaymentTable
         payments={listPayment.content}

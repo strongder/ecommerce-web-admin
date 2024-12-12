@@ -32,7 +32,7 @@ const ProductDetail = () => {
             </div>
 
             <div className="product-details">
-              <h2>{product.name}</h2>
+              <h3>{product.name}</h3>
               <p>
                 <strong>Code:</strong> {product.id}
               </p>
@@ -54,7 +54,7 @@ const ProductDetail = () => {
                 <strong>Description:</strong> {product?.description}
               </p>
               <p>
-                <strong>Discount:</strong> {product?.dispatch}
+                <strong>Discount:</strong> {product?.discount}%
               </p>
               <p>
                 <strong>CreateAt:</strong>{" "}
@@ -67,7 +67,6 @@ const ProductDetail = () => {
           <table className="variant-table">
             <thead>
               <tr>
-                <th>ID</th>
                 {product.varProducts &&
                   product.varProducts.length > 0 &&
                   Object.keys(product.varProducts[0].attribute).map(
@@ -84,7 +83,6 @@ const ProductDetail = () => {
               {product.varProducts &&
                 product.varProducts.map((variant, index) => (
                   <tr key={index}>
-                    <td>{variant.id}</td>
                     {variant.attribute &&
                       Object.values(variant.attribute).map((attrValue, idx) => (
                         <td key={idx}>{attrValue}</td>

@@ -22,9 +22,7 @@ const NotifyItem = (props) => {
   };
 
   useEffect(() => {
-    if (notifyItem.type === "ORDER") {
       handleFetchOrderById(notifyItem?.data);
-    }
   }, [notifyItem]);
 
   return (

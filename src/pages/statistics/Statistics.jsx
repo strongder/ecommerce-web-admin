@@ -4,7 +4,7 @@ import "./Statistics.scss";
 import RevenueStatistics from "./RevenueStatistics";
 import OrderStatistics from "./OrderStatistics";
 import ProductStatistics from "./ProductStatistics";
-import CategoryStatistics from "./CategoryStatistics";
+// import CategoryStatistics from "./CategoryStatistics";
 function Statistics() {
   const [activeTab, setActiveTab] = useState("revenue"); // Mặc định là tab Doanh thu
 
@@ -14,8 +14,6 @@ function Statistics() {
         return <RevenueStatistics />;
       case "orders":
         return <OrderStatistics />;
-        case "categories":
-          return <CategoryStatistics />;
       case "products":
         return <ProductStatistics />;
       default:
@@ -38,12 +36,6 @@ function Statistics() {
           onClick={() => setActiveTab("products")}
         >
           Sản phẩm
-        </button>
-        <button
-          className={`tab ${activeTab === "categories" ? "active" : ""}`}
-          onClick={() => setActiveTab("categories")}
-        >
-          Danh mục
         </button>
         <button
           className={`tab ${activeTab === "orders" ? "active" : ""}`}

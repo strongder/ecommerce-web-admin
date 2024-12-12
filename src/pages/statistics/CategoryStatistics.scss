@@ -25,7 +25,9 @@
     border-radius: 5px;
     background-color: #fff; // Nền trắng cho các phần
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Thêm bóng cho các phần
-
+    h3{
+      padding: 10px 0;
+    }
     .chart {
       display: flex;
       flex-direction: column;

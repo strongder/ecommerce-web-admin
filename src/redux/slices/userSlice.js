@@ -40,6 +40,15 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
+export const addAccount = createAsyncThunk(
+  "users/addAccount",
+  async (data) => {
+    const response = await userService.addAccount(data);
+    return response;
+  }
+);
+
+
 
 const initialState = {
   listUser: [],
@@ -62,36 +71,40 @@ const usersSlice = createSlice({
         state.loading = "loading";
       })
       .addCase(fetchUserById.fulfilled, (state, action) => {
-        state.loading = "idle";
+        state.loading = "successed";
         state.user = action.payload;
       })
       .addCase(fetchAllUser.pending, (state) => {
         state.loading = "loading";
       })
       .addCase(fetchAllUser.fulfilled, (state, action) => {
-        state.loading = "idle";
+        state.loading = "successed";
         state.listUser = action.payload;
       })
       .addCase(fetchCurrentUser.pending, (state) => {
         state.loading = "loadaing";
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.loading = "idle";
+        state.loading = "successed";
         state.currentUser = action.payload;
       })
       .addCase(fetchAddressByUserId.pending, (state) => {
         state.loading = "loading";
       })
       .addCase(fetchAddressByUserId.fulfilled, (state, action) => {
-        state.loading = "idle";
+        state.loading = "successed";
         state.listAddressByUser = action.payload;
       })
       .addCase(updateAvatar.pending, (state) => {
         state.loading = "loading";
       })
       .addCase(updateAvatar.fulfilled, (state, action) => {
-        state.loading = "idle";
+        state.loading = "successed";
         state.currentUser.avatar = action.payload;
+      })
+      .addCase(addAccount.fulfilled, (state, action) => {
+        state.loading = "successed";
+        state.listUser.content.push(action.payload);
       });
   },
 });

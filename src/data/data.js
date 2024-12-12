@@ -145,23 +145,38 @@ export const mockOrderData = {
   canceledOrders: 20, // Số lượng đơn hàng bị hủy
 };
 export const mockRevenueData = {
-  total: 10000000, // Tổng doanh thu
+  total: 125000000, // Tổng doanh thu
+
+  // Doanh thu theo thời gian (theo tháng trong năm 2023)
   revenueByTime: [
-      { _id: '2023-01-01', total: 1000000 },
-      { _id: '2023-01-02', total: 1200000 },
-      { _id: '2023-01-03', total: 800000 },
-      { _id: '2023-01-04', total: 1500000 },
-      { _id: '2023-01-05', total: 900000 },
+    { _id: "Jan", total: 10000000 },
+    { _id: "Feb", total: 12000000 },
+    { _id: "Mar", total: 15000000 },
+    { _id: "Apr", total: 8000000 },
+    { _id: "May", total: 14000000 },
+    { _id: "Jun", total: 11000000 },
+    { _id: "Jul", total: 13000000 },
+    { _id: "Aug", total: 12500000 },
+    { _id: "Sep", total: 13500000 },
+    { _id: "Oct", total: 14500000 },
+    { _id: "Nov", total: 15500000 },
+    { _id: "Dec", total: 16000000 },
   ],
+
+  // Doanh thu theo danh mục sản phẩm
   revenueByCategory: [
-      { _id: 'Danh mục A', total: 4000000 },
-      { _id: 'Danh mục B', total: 3000000 },
-      { _id: 'Danh mục C', total: 2000000 },
-      { _id: 'Danh mục D', total: 1000000 },
+    { _id: "Electronics", total: 40000000 },
+    { _id: "Fashion", total: 35000000 },
+    { _id: "Home & Kitchen", total: 25000000 },
+    { _id: "Beauty & Health", total: 15000000 },
+    { _id: "Sports", total: 10000000 },
   ],
+
+  // Doanh thu theo phương thức thanh toán
   revenueByPaymentMethod: [
-      { _id: 'Thẻ tín dụng', total: 5000000 },
-      { _id: 'Ví điện tử', total: 3000000 },
-      { _id: 'Tiền mặt', total: 2000000 },
+    { _id: "Credit Card", total: 50000000 },
+    { _id: "Bank Transfer", total: 30000000 },
+    { _id: "Cash on Delivery", total: 20000000 },
+    { _id: "E-Wallet", total: 25000000 },
   ],
 };

@@ -14,6 +14,14 @@ const PaymentTable = ({
   handleSearchChange,
   handleStatusChange,
 }) => {
+  const filteredPayments = payments.filter((payment) => {
+    const matchesSearch = payment.transactionId
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesStatus =
+      selectedStatus === "" || payment.status === selectedStatus;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <div className="payment-list">
@@ -32,9 +40,10 @@ const PaymentTable = ({
           className="filter-select"
         >
           <option value="">Tất cả trạng thái</option>
-          <option value="pending">Đang chờ</option>
-          <option value="Success">Hoàn tất</option>
-          <option value="Cancelled">Đã hủy</option>
+          <option value="PENDING">Đang chờ</option>
+          <option value="PAID">Hoàn tất</option>
+          <option value="EXPIRED">Hết hạn</option>
+          <option value="FAILED">Thất bại</option>
         </select>
       </div>
 
@@ -50,10 +59,10 @@ const PaymentTable = ({
           </tr>
         </thead>
         <tbody>
-          {payments.map((payment) => (
+          {filteredPayments.map((payment) => (
             <tr key={payment.transactionId}>
               <td>{payment.transactionId}</td>
-              <td>{payment.orderId || "N/A"}</td>
+              <td>{payment.orderCode || "N/A"}</td>
               <td>{payment.amount.toLocaleString()} VND</td>
               <td>{payment.paymentMethod}</td>
               <td>{payment.status}</td>

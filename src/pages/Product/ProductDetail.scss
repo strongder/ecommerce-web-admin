@@ -9,6 +9,9 @@
     align-items: center;
     justify-content: center;
   }
+  h3{
+    color: #333;
+  }
 
   .product-info {
     display: flex;
@@ -31,7 +34,7 @@
   }
 
   .product-details {
-    max-width: 400px;
+    max-width: 600px;
   }
 
   .product-details h2 {

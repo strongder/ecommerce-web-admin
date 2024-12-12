@@ -19,6 +19,10 @@ const ProductView = () => {
     sortBy: null,
   };
 
+  const filterProduct = listProduct?.content?.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   useEffect(() => {
     const newParam = {
       ...param,
@@ -83,8 +87,8 @@ const ProductView = () => {
           </tr>
         </thead>
         <tbody>
-          {listProduct?.content &&
-            listProduct?.content?.map((product, index) => (
+          {filterProduct &&
+            filterProduct?.map((product, index) => (
               <tr key={product?.id}>
                 <td>{index + 1 + (currentPage - 1) * param.pageSize}</td>
                 <td>

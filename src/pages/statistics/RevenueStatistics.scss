@@ -1,70 +1,45 @@
-// src/components/RevenueStatistics.scss
+// src/components/RevenueOverview.scss
 
-.revenue-statistics {
-    padding: 20px;
-    background-color: #121212; // Nền tối
-    color: #ffffff; // Màu chữ sáng
-
+.revenue-overview {
+  .statistic-month {
+    display: flex;
+    padding: 20px 0;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
     h1 {
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      min-width: 40%;
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
         text-align: center;
-        margin-bottom: 20px;
+      }
+
+      th {
+        background-color: #f4f4f4;
+        color: #333;
+      }
     }
 
-    .summary {
-        text-align: center;
-        margin-bottom: 30px;
+    .line-chart {
+      text-align: center;
+      margin-top: 20px;
+      
 
-        p {
-            font-size: 1.2rem;
+      .recharts-text {
+        .recharts-cartesian-axis-tick-value {
+          width: 100px;
         }
+      }
     }
-
-    .date-filter {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 30px;
-
-        label {
-            margin: 0 10px;
-        }
-
-        input {
-            margin-left: 5px;
-            padding: 5px;
-            border: 1px solid #555; // Đường viền tối
-            border-radius: 4px;
-            background-color: #333; // Nền tối cho input
-            color: #ffffff; // Màu chữ sáng
-        }
-
-        button {
-            margin-left: 10px;
-            padding: 5px 10px;
-            background-color: #6200ea; // Màu nút
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #3700b3; // Màu nút khi hover
-            }
-        }
-    }
-
-    .charts {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-
-        .chart {
-            width: 45%;
-            margin-bottom: 20px;
-
-            h2 {
-                text-align: center;
-                margin-bottom: 10px;
-            }
-        }
-    }
+  }
 }
+.recharts-wrapper{
+        width: 700px;
+      }

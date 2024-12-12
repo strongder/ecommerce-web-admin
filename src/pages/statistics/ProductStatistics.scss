@@ -16,6 +16,8 @@ $table-row-hover-bg: #f9f9f9;
     width: 100%; // Đảm bảo các phần chiếm toàn bộ chiều rộng
     margin-bottom: 40px; // Thêm khoảng cách giữa các phần
     padding: 20px;
+    display: flex;
+    flex-direction: column;
     border: 1px solid $border-color;
     border-radius: 5px;
     background-color: #fff; // Nền trắng cho các phần
@@ -23,6 +25,9 @@ $table-row-hover-bg: #f9f9f9;
   }
 
   h1,
+  h1{
+    margin: auto;
+  }
   h2,
   h3 {
     color: #333; // Màu chữ cho tiêu đề
@@ -37,6 +42,15 @@ $table-row-hover-bg: #f9f9f9;
     margin-bottom: 10px;
   }
 
+  .button-action{
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+
+    button{
+      font-weight: 600;
+    }
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -65,6 +79,7 @@ $table-row-hover-bg: #f9f9f9;
         font-weight: bold;
       }
     }
+    
 
     tbody {
       tr {
@@ -141,6 +156,32 @@ $table-row-hover-bg: #f9f9f9;
       &:hover {
         background-color: #0056b3;
       }
+    }
+  }
+  .category-statistic {
+    width: 100%; // Đảm bảo các phần chiếm toàn bộ chiều rộng
+    margin-bottom: 40px; // Thêm khoảng cách giữa các phần
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff; // Nền trắng cho các phần
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Thêm bóng cho các phần
+    h3{
+      padding: 10px 0;
+    }
+    .chart {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .recharts-wrapper {
+      margin-bottom: 20px;
+      min-width: 800px;
+      height: 400px;
     }
   }
 }

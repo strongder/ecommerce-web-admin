@@ -1,0 +1,46 @@
+
+.best-selling-products {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin-bottom: 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color:var(--clr-primary);;
+      font-weight: bold;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    img {
+      max-width: 50px; // Adjust the image size
+      height: auto;
+      border-radius: 4px; // Optional, for rounded images
+    }
+
+    tr:nth-child(even) {
+      background-color:var(--clr-primary);; // Alternate row color
+    }
+
+    tr:hover {
+      background-color: var(--clr-primary); // Hover effect on rows
+    }
+  }
+}

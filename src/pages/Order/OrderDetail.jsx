@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./OrderDetail.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { acceptOrder, fetchOrderById } from "../../redux/slices/orderSlice";
+import { acceptOrder, fetchOrderById, shipOrder } from "../../redux/slices/orderSlice";
 import { toast } from "react-toastify";
 
 const OrderDetail = () => {
@@ -23,7 +23,7 @@ const OrderDetail = () => {
   };
 
   const handleShiped = () => {
-    dispatch(acceptOrder(id));
+    dispatch(shipOrder(id));
     toast.success("Xác nhận đơn hàng thành công");
   };
   return (
@@ -47,6 +47,9 @@ const OrderDetail = () => {
       <div className="order-status">
         <h2>Thông Tin Đơn Hàng</h2>
         <p>
+          <strong>Mã đơn hàng:</strong> {order?.orderCode}
+        </p>
+        <p>
           <strong>Phương Thức Thanh Toán:</strong> {order?.paymentMethod}
         </p>
         <p>
@@ -68,7 +71,7 @@ const OrderDetail = () => {
             <tr>
               <th>Hình Ảnh</th>
               <th>Tên Sản Phẩm</th>
-              <th>Attribute</th>
+              <th>Phân loại</th>
               <th>Số Lượng</th>
               <th>Đơn Giá</th>
               <th>Tổng Cộng</th>

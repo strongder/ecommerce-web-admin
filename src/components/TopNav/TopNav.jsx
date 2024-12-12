@@ -39,7 +39,8 @@ const TopNav = () => {
   // Update local listNotifi whenever notifications from Redux change
   useEffect(() => {
     if (notifications) {
-      setListNotifi(notifications);
+      const newReverseNotifi = [...notifications].reverse(); // Đảo ngược mảng thông báo để hiển thị thông báo mới nhất lên trên
+      setListNotifi(newReverseNotifi);
     }
   }, [notifications]);
 
@@ -82,9 +83,6 @@ const TopNav = () => {
         </div>
       </div>
       <div className="content-top-btns">
-        <button type="button" className="search-btn content-top-btn">
-          <img src={iconsImgs.search} alt="Search Icon" />
-        </button>
         <button
           className="notification-btn content-top-btn"
           onClick={handleChangeOpen}
